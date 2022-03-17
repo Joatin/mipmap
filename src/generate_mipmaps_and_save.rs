@@ -7,7 +7,7 @@ pub fn generate_mipmaps_and_save(original_image: &[u8], filter_type: FilterType,
     let images = generate_mipmaps(original_image, filter_type);
 
     for (index, image) in images.into_iter().enumerate() {
-        let path = save_path.join(format!("{}_{}.png", image_name, index));
+        let path = save_path.join(format!("{}/mip_{}.png", image_name, index));
         image.save_with_format(&path, ImageFormat::Png).unwrap();
     }
 }
