@@ -6,7 +6,7 @@ macro_rules! include_mips{
             let mut mip_maps = vec![];
             let mut level = 0;
             while Ok(file) = dir.get_file(&format!("mip_{}.png", level)) {
-                mip_maps.push(lib_rs.contents());
+                mip_maps.push(file.contents());
                 level += 1;
             }
 
