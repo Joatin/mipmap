@@ -24,8 +24,9 @@ use crate::generate_mipmaps_and_save;
 /// }
 /// ```
 pub fn generate_mipmap_for_path_and_save_to_out_dir(input_dir: &str, filter_type: FilterType) -> Result<(), Box<dyn Error + Send + Sync>> {
-    let paths = read_dir(input_dir)?;
     let out_dir = env::var("OUT_DIR")?;
+    let in_dir = env::var("CARGO_MANIFEST_DIR")?;
+    let paths = read_dir(Path::new(&in_dir).join(input_dir))?;
 
     for path in paths {
         let path = path?;
