@@ -32,9 +32,11 @@ pub fn generate_mipmap_for_path_and_save_to_out_dir(input_dir: &str, filter_type
         let path = path?;
         if path.file_name().into_string().unwrap().ends_with(".png") {
             let image_name = path.file_name().into_string().unwrap();
+            println!("Generating mip maps for {}", image_name);
             let image = read(path.path())?;
             let dest_path = Path::new(&out_dir);
-            generate_mipmaps_and_save(&image, filter_type, &image_name, dest_path)?;
+            let total = generate_mipmaps_and_save(&image, filter_type, &image_name, dest_path)?;
+            println!("Created {} layers for {}", total, image_name);
         }
     }
     Ok(())
