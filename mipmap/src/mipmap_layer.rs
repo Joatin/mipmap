@@ -6,7 +6,7 @@ pub struct MipmapLayer<'a> {
 }
 
 impl<'a> MipmapLayer<'a> {
-    pub fn new(level: usize, data: &'a [u8]) -> Self {
+    pub const fn new(level: usize, data: &'a [u8]) -> Self {
         Self {
             level,
             data
