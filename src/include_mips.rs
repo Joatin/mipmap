@@ -1,10 +1,13 @@
 #[macro_export]
 macro_rules! include_mips{
-    ($file_name:expr, for $i:ident in $range:expr)=>{
+    ($file_name:expr)=>{
         {
+            let dir = include_dir::include_dir!(format!("{}/{}/", env!("OUT_DIR"), $file_name))
             let mut mip_maps = vec![];
-            for $i in $range {
-                mip_maps.push(include_bytes!(concat!(env!("OUT_DIR"), "/", $file_name, "/mip_", $i, ".png")))
+            let mut level = 0;
+            while Ok(file) = dir.get_file(&format!("mip_{}.png", level)) {
+                mip_maps.push(lib_rs.contents());
+                level += 1;
             }
 
             mip_maps
