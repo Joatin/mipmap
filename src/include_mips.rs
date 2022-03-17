@@ -2,7 +2,7 @@
 macro_rules! include_mips{
     ($file_name:expr)=>{
         {
-            let dir = mipmap::include_dir!(env!("OUT_DIR"));
+            let dir = mipmap::include_dir!("test");
             let mut mip_maps = vec![];
             let mut level = 0;
             while let Ok(file) = dir.get_file(&format!("mip_{}.png", level)) {
