@@ -24,11 +24,15 @@ impl Mipmap {
         })
     }
 
-    pub fn get_all(&self) -> Vec<u8> {
-        self.layers.iter().map(|layer| {
+    pub fn num_layers(&self) -> usize {
+        self.layers.len()
+    }
+
+    pub fn get_all(&self) -> (usize, Vec<u8>) {
+        (self.num_layers(), self.layers.iter().map(|layer| {
             let image = image::load_from_memory(layer.data).unwrap();
             image.into_rgba8().into_vec()
-        }).flatten().collect()
+        }).flatten().collect())
     }
 }
 
