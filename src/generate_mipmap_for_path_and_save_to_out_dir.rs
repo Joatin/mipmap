@@ -34,7 +34,7 @@ pub fn generate_mipmap_for_path_and_save_to_out_dir(input_dir: &str, filter_type
             let image_name = path.file_name().into_string().unwrap().replace(".png", "");
             let image = read(path.path())?;
             let dest_path = Path::new(&out_dir);
-            generate_mipmaps_and_save(&image, filter_type, &image_name, dest_path)
+            generate_mipmaps_and_save(&image, filter_type, &image_name, dest_path)?;
         }
     }
     Ok(())

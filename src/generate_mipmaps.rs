@@ -1,9 +1,10 @@
 use image::imageops::FilterType;
 use image::DynamicImage;
+use std::error::Error;
 
 
-pub fn generate_mipmaps(original_image: &[u8], filter_type: FilterType) -> Vec<DynamicImage> {
-    let mut mipmaps = vec![image::load_from_memory(original_image).unwrap()];
+pub fn generate_mipmaps(original_image: &[u8], filter_type: FilterType) -> Result<Vec<DynamicImage>, Box<dyn Error + Send + Sync>> {
+    let mut mipmaps = vec![image::load_from_memory(original_image)?];
 
     let mut new_width = mipmaps[0].width() / 2;
     let mut new_height = mipmaps[0].height() / 2;
@@ -18,7 +19,7 @@ pub fn generate_mipmaps(original_image: &[u8], filter_type: FilterType) -> Vec<D
         new_height = new_height / 2;
     }
 
-    mipmaps
+    Ok(mipmaps)
 }
 
 #[cfg(test)]
