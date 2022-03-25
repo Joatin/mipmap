@@ -1,5 +1,6 @@
 use crate::mipmap_layer::MipmapLayer;
 
+#[derive(Debug)]
 pub struct Mipmap<'a> {
     layers: &'a [MipmapLayer<'a>]
 }

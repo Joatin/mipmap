@@ -1,5 +1,6 @@
 
 
+#[derive(Debug)]
 pub struct MipmapLayer<'a> {
     pub data: &'a [u8],
     pub level: usize
