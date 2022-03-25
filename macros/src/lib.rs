@@ -22,6 +22,9 @@ pub fn include_mips(input: TokenStream) -> TokenStream {
         let next_path = base_path.join(&format!("mip_{}.png", layer));
 
         if !next_path.exists() {
+            if layer == 0 {
+                panic!("Image {} not found. Have you perhaps forgotten to add a build.rs step?", path)
+            }
             break;
         }
 
@@ -35,7 +38,7 @@ pub fn include_mips(input: TokenStream) -> TokenStream {
     }
 
     (quote::quote! {
-        mipmap::Mipmap::new(&[ #(#mipmap_layers),* ])
+        mipmap::Mipmap::<#layer>::new(&[ #(#mipmap_layers),* ])
     }).into()
 }
 
