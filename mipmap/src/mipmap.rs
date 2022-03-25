@@ -1,12 +1,12 @@
 use crate::mipmap_layer::MipmapLayer;
 
 #[derive(Debug)]
-pub struct Mipmap<'a, const LAYERS: usize> {
-    layers: &'a [MipmapLayer<'a>; LAYERS]
+pub struct Mipmap<'a> {
+    layers: &'a [MipmapLayer<'a>]
 }
 
-impl<'a, const LAYERS: usize> Mipmap<'a, LAYERS> {
-    pub const fn new(layers: &'a [MipmapLayer; LAYERS]) -> Self {
+impl<'a> Mipmap<'a> {
+    pub const fn new(layers: &'a [MipmapLayer]) -> Self {
         Self {
             layers
         }
@@ -26,7 +26,7 @@ impl<'a, const LAYERS: usize> Mipmap<'a, LAYERS> {
     }
 
     pub const fn num_layers(&'a self) -> usize {
-        LAYERS
+        self.layers.len()
     }
 
     pub fn get_all(&'a self) -> Vec<u8> {

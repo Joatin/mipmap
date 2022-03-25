@@ -38,7 +38,7 @@ pub fn include_mips(input: TokenStream) -> TokenStream {
     }
 
     (quote::quote! {
-        mipmap::Mipmap::<#layer>::new(&[ #(#mipmap_layers),* ])
+        mipmap::Mipmap::new(&[ #(#mipmap_layers),* ])
     }).into()
 }
 
